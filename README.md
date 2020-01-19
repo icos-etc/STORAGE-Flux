@@ -1,5 +1,10 @@
-# STORAGE-Flux
+# Storage flux computation     
 
+<http://www.icos-etc.eu/icos/>      
+info@icos-etc.eu      
+g.nicolini@unitus.it     
+
+***
 
 Utility for calculating storage fluxes according to the ICOS requirements.     
 Processing is done using ICOS formatted storage and meteo files. A set of metadata informations must be also supplied.     
