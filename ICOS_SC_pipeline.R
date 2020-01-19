@@ -50,11 +50,7 @@ source(paste0(getwd(), '/ICOS_SC_config.R'))
 # Data and metadata collection ================================================
 
 ## Meteo data .................................................................
-
-if('ICOS_SC_meteo_data.R' %in% list.files(getwd())){
-  source('ICOS_SC_meteo_data.R')
-  Meteo_dwnld(site.ID, t0 = t0, tX = tX, out_dir = BM.data.dir, remove_raw = TRUE, remove_intermediate = TRUE)
-}
+# if('ICOS_SC_meteo_data.R' %in% list.files(getwd())){source('ICOS_SC_meteo_data.R'); Meteo_dwnld(site.ID, t0 = t0, tX = tX, out_dir = BM.data.dir, remove_raw = TRUE, remove_intermediate = TRUE)}
 
 # Check and list the meteo file
 meteo.files <- list.files(BM.data.dir, pattern = paste0(site.ID, '_meteo_sc.csv'), full.names = TRUE)
@@ -68,12 +64,8 @@ if(length(meteo.files) == 0){
 
 
 ## Storage (profile) data .....................................................
+# if('ICOS_SC_storage_data.R' %in% list.files(getwd())){source('ICOS_SC_storage_data.R'); Storage_dwnld(site.ID, t0 = t0, tX = tX, out_dir = SC.data.dir)}
 
-if('ICOS_SC_storage_data.R' %in% list.files(getwd())){
-  source('ICOS_SC_storage_data.R')
-  # download and manipulate profile data
-  Storage_dwnld(site.ID, t0 = t0, tX = tX, out_dir = SC.data.dir)
-}
 # check and list the storage file
 SC.files <- list.files(SC.data.dir, full.names = TRUE)
 
@@ -86,12 +78,7 @@ if(length(SC.files) == 0){
 
 
 # BADM ........................................................................
-
-if('ICOS_SC_badm.R' %in% list.files(getwd())){
-  # download and manipulate storage, meteo and EC BADM
-  source('ICOS_SC_badm.R')
-  BADM_dwnld(site.ID)
-}
+# if('ICOS_SC_badm.R' %in% list.files(getwd())){source('ICOS_SC_badm.R'); BADM_dwnld(site.ID)}
 
 # check and list the storage file
 BADM.files <- list.files(MD.dir, full.names = FALSE)
@@ -287,7 +274,7 @@ write.csv(BM.data.avg, paste0(BM.data.dir, site.ID, '_meteo_sc_AVG.csv', sep='')
 
 # . SENSIBLE HEAT storage  ----------------------------------------------------
 
-# source('ICOS_SCH.R') # UNDER DEVELOPMENT
+# source('ICOS_SCH.R') # W.I.P.
 
 
 
@@ -341,7 +328,7 @@ for(i.gas in 1:length(sc.gases)){
   
     }else{ # 'Separate' setup
     
-    # WIP 
+    # W.I.P. 
     
   }
   
@@ -359,7 +346,7 @@ for(i.gas in 1:length(sc.gases)){
     
   }else{ # 'Separate' setup
     
-    # WIP
+    # W.I.P.
   }
   
   # Control on actual levels according to the EC measurement height and possibly subset 
@@ -519,7 +506,7 @@ for(i.gas in 1:length(sc.gases)){
     
   }
   
-  # Here some other checks on submitted data: WIP
+  # Here some other checks on submitted data: W.I.P.
   
   
   
@@ -595,7 +582,7 @@ for(i.gas in 1:length(sc.gases)){
   
   if(STO_CONFIG == 'Separate'){
     
-    # UNDER DEVELOPMNET
+    # W.I.P.
   }
   
   
@@ -610,7 +597,7 @@ for(i.gas in 1:length(sc.gases)){
   
   if(STO_CONFIG == 'Simultaneous'){
     
-    # UNDER DEVELOPMNET
+    # W.I.P.
   }
   
   
@@ -782,7 +769,8 @@ for(i.gas in 1:length(sc.gases)){
         
       }
       
-    } # HALF-HOUR LOOP END
+    } 
+    
     
     # assign time reference
     names(PRO.GAS.avg.ls) <- as.character(SC.time[-c(length(SC.time))])
@@ -815,7 +803,7 @@ for(i.gas in 1:length(sc.gases)){
   }
   
   # Sensible heat storage flux [Wm-2]
-  # WIP 
+  # W.I.P. 
   
   
   windows()
@@ -829,7 +817,16 @@ for(i.gas in 1:length(sc.gases)){
 
 
 
-# Output file -----------------------------------------------------------------
+# Output ----------------------------------------------------------------------
+# Potential output variables:
+# SCCO2 storage flux µmolCO2 m-2 s-1
+# SCH4 Methane (CH4) storage flux nmolCH4 m-2 s-1
+# SN2O Nitrous oxide (N2O) storage flux nmolN2O m-2 s-1
+# SH Heat storage flux in the air W m-2
+# SLE Latent heat storage flux W m-2
+# CO2 Carbon Dioxide (CO2) mole fraction in dry air measured along the profile µmolCO2 mol-1
+# CH4 Methane (CH4) mole fraction in dry air measured along the profile nmolCH4 mol-1
+# N2O Nitrous Oxide (N2O) mole fraction in dry air measured along the profile nmolN2O mol-1
 
 # renaming SC list 
 names(SC.GAS) <- paste0('SC', sc.gases)
