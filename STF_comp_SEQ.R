@@ -11,22 +11,22 @@
 #'' ***************************************************************************
 
 stfcomp_SEQ <- function (
-  site.ID,
-  gas,
+  site.ID, # station ID
+  gas, # current gas name (e.g. 'CO2')
   Dt = 1800, # time interval between the two profile samplings (generally 1800 s, the default)
-  PRO.data.path,
-  SC.MD,
-  EC.height,
-  BM.data.path,
-  BM.data.AVG.path,
-  RH.profile,
-  unc = 'SD',
-  plot.profile.data = FALSE,
-  plot.conc.data = FALSE,
-  plot.SC.flux = TRUE,
-  warns = FALSE,
-  write.output = FALSE,
-  output.dir = NULL
+  PRO.data.path, # path to profile data folder
+  SC.MD,  # path to profile meta-data folder
+  EC.height, # height of the eddy covariance system
+  BM.data.path,  # path to raw meteo data folder
+  BM.data.AVG.path,  # path to profile averaged meteo data folder
+  RH.profile = FALSE, # set TRUE if air relative humidity is sampled along a profile
+  unc = 'SD', # storage flux uncertainty. Can be quantified either from the standard deviation ('SD', default) or standard error ('SE') of the concentrations.
+  plot.profile.data = FALSE, # set TRUE to save an image if the averaged concentrations profile. Warning one figure is created for each averaging period, use it for debugging purposes only.
+  plot.conc.data = FALSE, # set TRUE to save an image if the actually averaged concentrations. Warning one figure is created for each averaging period, use it for debugging purposes only.
+  plot.SC.flux = TRUE, # set TRUE to save an image of the storage flux time series and daily cycle.
+  warns = FALSE, # set TRUE to display warning messages related to controls on profile data.
+  write.output = TRUE, # set TRUE to save numerical output files.
+  output.dir = NULL  # output folder path
 ){
   
   # Install required packages if they are not already installed ..............
